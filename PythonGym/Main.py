@@ -1,6 +1,6 @@
 from LGymClient import agentLoop
 from BaseAgent import BaseAgent
-from ReactiveAgent import ReactiveAgent
+# from ReactiveAgent import ReactiveAgent
 from GoalOrientedAgent import GoalOrientedAgent
 
 

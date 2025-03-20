@@ -11,7 +11,5 @@ class BCNode(Node):
         self.y = int(y)
     
     def IsEqual(self,node):
-        #TODO: dos nodos son iguales cuando sus coordenadas x e y son iguales.
-        return False
-
+        return self.x == node.x and self.y == node.y
     

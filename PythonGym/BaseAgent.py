@@ -25,6 +25,30 @@ class BaseAgent:
         action = random.randint(0,4)
         return action, True
     
+    def print_perception(self, perception):
+        labels = ["NEIGHBORHOOD_UP",
+                  "NEIGHBORHOOD_DOWN",
+                  "NEIGHBORHOOD_RIGHT",
+                  "NEIGHBORHOOD_LEFT",
+                  "NEIGHBORHOOD_DIST_UP",
+                  "NEIGHBORHOOD_DIST_DOWN",
+                  "NEIGHBORHOOD_DIST_RIGHT",
+                  "NEIGHBORHOOD_DIST_LEFT",
+                  "PLAYER_X",
+                  "PLAYER_Y",
+                  "COMMAND_CENTER_X",
+                  "COMMAND_CENTER_Y",
+                  "AGENT_X",
+                  "AGENT_Y",
+                  "CAN_FIRE",
+                  "HEALTH",
+                  "LIFE_X",
+                  "LIFE_Y",	
+                  "TIME"]
+
+        for label, val in zip(labels, perception):
+            print(label, val)
+    
     #Metodo que se llama al finalizar el agente, se pasa el estado de terminacion
     def End(self, win):
         print("Agente finalizado")
