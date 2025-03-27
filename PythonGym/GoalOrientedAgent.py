@@ -59,14 +59,22 @@ class GoalOrientedAgent(BaseAgent):
     
     #método interno que encapsula la creació nde un plan
     def _CreatePlan(self,perception,map):
-        #currentGoal = self.problem.GetGoal()
+        currentGoal = self.problem.GetGoal()
+        #-con goalMonitor, seleccionamos la meta actual 
+        # (Que será la mas propicia => definir la estrategia a seguir).
         if self.goalMonitor != None:
-            #TODO creamos un plan, pasos:
-            #-con gualMonito, seleccionamos la meta actual (Que será la mas propicia => definir la estrategia a seguir).
-            #-le damos el modo inicial _CreateInitialNode
-            #-establecer la meta actual al problema para que A* sepa cual es.
-            #-Calcular el plan usando A*
-            print("TODO aqui faltan cosas :)")
+            newGoal = self._CreateDefaultGoal(perception)
+        else:
+            newGoal = self.goalMonitor.SelectGoal(perception, map, self)
+
+        #-le damos el nodo inicial _CreateInitialNode
+        initialNode = self._CreateInitialNode(perception)
+
+        #-establecer la meta actual al problema para que A* sepa cual es.
+        self.problem = BCProblem(initialNode,newGoal,xSize,ySize)
+        self.aStar = AStar(self.problem)
+        
+        #-Calcular el plan usando A*
         return self.aStar.GetPlan()
         
     @staticmethod
@@ -114,17 +122,6 @@ class GoalOrientedAgent(BaseAgent):
         goal3Player = self._CreatePlayerGoal(perception)
         self.goalMonitor = GoalMonitor(self.problem,[goal1CommanCenter,goal2Life,goal3Player])
         print("Agent inicializado")
-
-        #TODO inicializamos:
-        # - creamos el problema con BCProblem
-        # - inicializamos el mapa problem.InitMap
-        # - inicializamos A*
-        # - creamos un plan inicial
-        print("TODO aqui faltan cosas :)")
-        goal1CommanCenter = None
-        goal2Life = self._CreateLifeGoal(perception)
-        goal3Player = self._CreatePlayerGoal(perception)
-        self.goalMonitor = GoalMonitor(self.problem,[goal1CommanCenter,goal2Life,goal3Player])
 
     #muestra un plan por consola
     @staticmethod
