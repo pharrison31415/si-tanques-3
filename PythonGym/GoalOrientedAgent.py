@@ -62,7 +62,7 @@ class GoalOrientedAgent(BaseAgent):
         currentGoal = self.problem.GetGoal()
         #-con goalMonitor, seleccionamos la meta actual 
         # (Que será la mas propicia => definir la estrategia a seguir).
-        if self.goalMonitor != None:
+        if self.goalMonitor == None:
             newGoal = self._CreateDefaultGoal(perception)
         else:
             newGoal = self.goalMonitor.SelectGoal(perception, map, self)
