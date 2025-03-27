@@ -71,7 +71,7 @@ class GoalOrientedAgent(BaseAgent):
         initialNode = self._CreateInitialNode(perception)
 
         #-establecer la meta actual al problema para que A* sepa cual es.
-        self.problem = BCProblem(initialNode,newGoal,xSize,ySize)
+        self.problem.SetGoal(newGoal)
         self.aStar = AStar(self.problem)
         
         #-Calcular el plan usando A*
