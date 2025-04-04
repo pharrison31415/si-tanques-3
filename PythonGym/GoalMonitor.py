@@ -28,7 +28,7 @@ class GoalMonitor:
     def SelectGoal(self, perception, map, agent):
         #TODO definir la estrategia del cambio de meta
         print("TODO aqui faltan cosas :)")
-        return random.choice(self.goals)
+        return self.goals[random.randint(0,len(self.goals))]
     
     def UpdateGoals(self,goal, goalId):
         self.goals[goalId] = goal
