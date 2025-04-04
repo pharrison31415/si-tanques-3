@@ -1,5 +1,3 @@
-
-
 #Algoritmo A* genérico que resuelve cualquier problema descrito usando la plantilla de la
 #la calse Problem que tenga como nodos hijos de la clase Node
 class AStar:
@@ -40,7 +38,7 @@ class AStar:
         while found == None and i < len(self.open):
             node = self.open[i]
             i += 1
-            if node.IsEqual(sucesor):
+            if node == sucesor:
                 found = node
         return found
 
@@ -50,6 +48,7 @@ class AStar:
         path = []
         #TODO: devuelve el path invertido desde la meta hasta que el padre sea None.
         return path
+    
 
-
+    
 
