@@ -8,6 +8,7 @@ class AStar:
         self.problem = problem #problema a resolver
 
     def GetPlan(self):
+        #for seted goal, ellaborate the path with the minimum cost to the goal, and return the path in the right order
         findGoal = False
         #TODO implementar el algoritmo A*
         #cosas a tener en cuenta:

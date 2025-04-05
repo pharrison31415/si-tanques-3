@@ -10,7 +10,7 @@ class Node:
     def GetParent(self):
         return self.parent
     
-    #comprueba que dos nodos son iguales (se necesita reimplementar)
+    
     def __repr__(self):
         pass
     
