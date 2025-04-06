@@ -40,8 +40,20 @@ class BCProblem(Problem):
     #Genera la lista de sucesores del nodo (Se necesita reimplementar)
     def GetSucessors(self, node):
         successors = []
-        #TODO: sucesores de un nodo dado
-        print("Aqui falta ncosas por hacer :) ")
+        x = node.x
+        y = node.y
+        #direcciones posibles
+        directions = [(1,0),(-1,0),(0,1),(0,-1)]
+        #iteramos por cada dirección
+        for dx,dy in directions:
+            #calculamos la nueva posición
+            newX = x + dx
+            newY = y + dy
+            #si la nueva posición es válida, creamos un nodo y lo añadimos a la lista de sucesores
+            if newX >= 0 and newX < self.xSize and newY >= 0 and newY < self.ySize:
+                if BCProblem.CanMove(self.map[newX][newY]):
+                    self.CreateNode(successors,node,newX,newY)
+    
         return successors
     
     #métodos estáticos
