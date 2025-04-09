@@ -25,11 +25,12 @@ class AStar:
         self.open.append(self.problem.Initial())
         path = []
         while self.open:
+            
             self.open.sort(key=lambda x: x.F()) #ordenamos la lista de abiertos por el coste total (G+H)
             current_node = self.open.pop(0)
 
-            #si el nodo actual es la meta, reconstruimos el path y lo devolvemos
-            if current_node.value == AgentConsts.AGENT:
+            #si el nodo actual es la meta, reconstruimos el path y lo devolvemos ##borrar esta parte y poner para devolver path cuando no hay mas abiertos
+            if current_node.x == AgentConsts.AGENT_X and current_node.y == AgentConsts.AGENT_Y:
                 path = self.ReconstructPath(current_node)
                 return path
             
@@ -56,7 +57,7 @@ class AStar:
     def _ConfigureNode(self, node, parent, newG):
         node.SetParent(parent)
         node.SetG(newG)
-        node.SetH(self.problem.GetHeuristic(node))
+        node.SetH(self.problem.Heuristic(node))
 
     #nos dice si un sucesor está en abierta. Si esta es que ya ha sido expandido y tendrá un coste, comprobar que le nuevo camino no es más eficiente
     #En caso de serlos, _ConfigureNode para setearle el nuevo padre y el nuevo G, asi como su heurística
