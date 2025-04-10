@@ -27,13 +27,7 @@ class AStar:
         while self.open:
             
             self.open.sort(key=lambda x: x.F()) #ordenamos la lista de abiertos por el coste total (G+H)
-            current_node = self.open.pop(0)
-
-            #si el nodo actual es la meta, reconstruimos el path y lo devolvemos ##borrar esta parte y poner para devolver path cuando no hay mas abiertos
-            if current_node.x == AgentConsts.AGENT_X and current_node.y == AgentConsts.AGENT_Y:
-                path = self.ReconstructPath(current_node)
-                return path
-            
+            current_node = self.open.pop(0)            
 
             for successor in self.problem.GetSucessors(current_node):
                 #si el sucesor no está en la lista de abiertos, lo añadimos
@@ -49,8 +43,7 @@ class AStar:
 
             self.processed.add(current_node)
 
-        #mientras no encontremos la meta y haya elementos en open....
-        #TODO implementar el bucle de búsqueda del algoritmo A*
+        path = self.ReconstructPath(current_node)
         return path
 
     #nos permite configurar un nodo (node) con el padre y la nueva G
