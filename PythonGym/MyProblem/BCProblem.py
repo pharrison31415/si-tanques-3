@@ -105,8 +105,18 @@ class BCProblem(Problem):
     #se utiliza para calcular el coste de cada elemento del mapa 
     @staticmethod
     def GetCost(value):
-        #TODO: debes darle un coste a cada tipo de casilla del mapa.
-        return sys.maxsize
+        if value == AgentConsts.UNBREAKABLE:
+            return 1000
+        elif value == AgentConsts.SEMI_UNBREKABLE:
+            return 100
+        elif value == AgentConsts.SEMI_BREKABLE:
+            return 10
+        elif value == AgentConsts.BREAKABLE:
+            return 1
+        elif value == AgentConsts.EMPTY:
+            return 1
+        else:
+            return 0
     
     #crea un nodo y lo añade a successors (lista) con el padre indicado y la posición x,y en coordenadas mapa 
     def CreateNode(self,successors,parent,x,y):
