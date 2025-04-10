@@ -31,13 +31,11 @@ class GoalMonitor:
             self.lastTime = perception[AgentConsts.TIME]
             return True
         
-        
-
         return False
     
     #selecciona la meta mas adecuada al estado actual
     def SelectGoal(self, perception, map, agent):
-        goal_distances = [ abs(g.x - agent.x) + abs(g.y - agent.y) for g in self.goals ]
+        goal_distances = [ abs(g.x - perception[AgentConsts.AGENT_X]) + abs(g.y - perception[AgentConsts.AGENT_Y]) for g in self.goals ]
         min_distance = min(goal_distances)
         min_distance_index = goal_distances.index(min_distance)
         return self.goals[min_distance_index]

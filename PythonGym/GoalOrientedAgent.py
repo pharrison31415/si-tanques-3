@@ -118,8 +118,6 @@ class GoalOrientedAgent(BaseAgent):
         print("Plan inicial creado")
 
         GoalOrientedAgent.ShowPlan(self.plan)
-        #generar objetivos de vida y player
-        goal1CommanCenter = None
         goal2Life = self._CreateLifeGoal(perception)
         goal3Player = self._CreatePlayerGoal(perception)
         self.goalMonitor = GoalMonitor(self.problem,[goal1CommanCenter,goal2Life,goal3Player])

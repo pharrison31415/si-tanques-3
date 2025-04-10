@@ -33,8 +33,9 @@ class BCProblem(Problem):
 
     #Calcula la heuristica del nodo en base al problema planteado (Se necesita reimplementar)
     def Heuristic(self, node):
+
         #TODO: heurística del nodo
-        print("Aqui falta ncosas por hacer :) ")
+        # print("Aqui falta ncosas por hacer :) ")
         return 0
 
     #Genera la lista de sucesores del nodo (Se necesita reimplementar)
@@ -111,9 +112,9 @@ class BCProblem(Problem):
             return 100
         elif value == AgentConsts.SEMI_BREKABLE:
             return 10
-        elif value == AgentConsts.BREAKABLE:
+        elif value == AgentConsts.BRICK:
             return 1
-        elif value == AgentConsts.EMPTY:
+        elif value == AgentConsts.NOTHING:
             return 1
         else:
             return 0
