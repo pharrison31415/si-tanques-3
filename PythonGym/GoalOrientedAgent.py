@@ -50,6 +50,7 @@ class GoalOrientedAgent(BaseAgent):
  
         #le damos update a la máquina de estados.
         action, shot = self.stateMachine.Update(perception, map, self)
+        print(self.stateMachine.curentState)
 
         #Actualizamos el plan refrescando la posición del player (meta 2)
         goal3Player = self._CreatePlayerGoal(perception)

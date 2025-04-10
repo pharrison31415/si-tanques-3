@@ -47,8 +47,8 @@ class LGymClient:
         return True
     
     def _precessingPerception(self, data):
-        print("Mostrando la percepcion")
-        print(data)
+        # print("Mostrando la percepcion")
+        # print(data)
         attributes = self._ParseDataToAttributes(data)
         if len(attributes) > 0:
             if self.IsCommand("perception_map",attributes) :

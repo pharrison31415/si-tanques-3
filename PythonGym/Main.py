@@ -5,6 +5,6 @@ from GoalOrientedAgent import GoalOrientedAgent
 
 
 agent = GoalOrientedAgent("1","Isma")
-agentLoop(agent,True)
+agentLoop(agent,False)
 
  
