@@ -35,7 +35,7 @@ class ExecutePlan(State):
             return AgentConsts.NO_MOVE,False
         
         nextNode = plan[0]
-        if self.IsInNode(nextNode,x,y,self.lastMove,0.17) and len(plan) > 1:
+        if self.IsInNode(nextNode,x,y,self.lastMove,0.4) and len(plan) > 1:
             plan.pop(0)
             if len(plan) == 0: # si al llegar al punto ya no hay nada mas que hacer me paro e indico que se recalcule
                 agent.goalMonitor.ForceToRecalculate()
@@ -82,18 +82,19 @@ class ExecutePlan(State):
     
     @staticmethod
     def IsInNode(node, x,y, lastDir, threshold):
+        #+0.5 porque es el centro del nodo
         distanceX = abs((node.x+0.5) - x)
         distanceY = abs((node.y+0.5) - y)
-        inAceptZone = abs((node.x+0.5) - x) < threshold and abs((node.y+0.5) - y)< threshold #+0.5 porque es el centro del nodo
+        inAceptZone = distanceX < threshold and distanceY < threshold #+0.5 porque es el centro del nodo
         if inAceptZone:
             return True
         else:
             directionX,directionY = ExecutePlan.GetDirectionVector(lastDir)
             simulateX = x+directionX*threshold
             simulateY = y+directionY*threshold
-            simulateDistanceX = abs((node.x+0.5) - simulateX)
-            simulateDistanceY = abs((node.y+0.5) - simulateY)
-            if (simulateDistanceX+simulateDistanceY) > (distanceX+distanceY): ## estoy mas lejos me he pasado, paro
+            simulateDistance = abs((node.x+0.5) - simulateX) + abs((node.y+0.5) - simulateY)
+            currentDistance = distanceX + distanceY
+            if simulateDistance>currentDistance: ## estoy mas lejos me he pasado, paro
                 return True
             else: #aún no he llegado al punto de aceptación
                 return False

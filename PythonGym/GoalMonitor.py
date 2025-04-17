@@ -19,6 +19,7 @@ class GoalMonitor:
     def NeedReplaning(self, perception, map, agent):
         if self.recalculate:
             self.lastTime = perception[AgentConsts.TIME]
+            self.recalculate = False
             return True
         
         #si el tiempo ha pasado más de 10 segundos, se fuerza la replanificación

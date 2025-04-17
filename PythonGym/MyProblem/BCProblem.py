@@ -16,6 +16,9 @@ class BCProblem(Problem):
         self.map = np.zeros((xSize,ySize),dtype=int)
         self.xSize = xSize
         self.ySize = ySize
+
+        self._distance_cache = None
+        self._cache_goal_coords = None
     
     #inicializa un mapa con el mapa proveniente del entorno Vector => Matriz
     def InitMap(self,m):
@@ -33,11 +36,45 @@ class BCProblem(Problem):
 
     #Calcula la heuristica del nodo en base al problema planteado (Se necesita reimplementar)
     def Heuristic(self, node):
+        goal_x = self.goal.x
+        goal_y = self.goal.y
+        if self._distance_cache is None or self._cache_goal_xy != (goal_x, goal_y):
+            INF = float('inf')
+            distances = np.full((self.xSize, self.ySize), INF)
 
-        #TODO: heurística del nodo
-        # print("Aqui falta ncosas por hacer :) ")
-        return 0
+            from collections import deque
+            queue = deque()
 
+            # distance to goal cell is zero
+            distances[goal_x][goal_y] = 0
+            queue.append((goal_x, goal_y))
+
+            directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+
+            # floodfill depending on goal cell
+            while queue:
+                current_x, current_y = queue.popleft()
+                for dx, dy in directions:
+                    new_x = current_x + dx
+                    new_y = current_y + dy
+                    
+                    if (0 <= new_x < self.xSize and
+                        0 <= new_y < self.ySize and
+                        BCProblem.CanMove(self.map[new_x][new_y])):
+                        # if shorter path exists, update distance
+                        if distances[new_x][new_y] > distances[current_x][current_y] + 1:
+                            distances[new_x][new_y] = distances[current_x][current_y] + 1
+                            queue.append((new_x, new_y))
+
+            # cache updated
+            self._distance_cache = distances
+            self._cache_goal_xy = (goal_x, goal_y)
+
+        return self._distance_cache[node.x][node.y]
+
+
+
+    
     #Genera la lista de sucesores del nodo (Se necesita reimplementar)
     def GetSucessors(self, node):
         successors = []

@@ -57,7 +57,7 @@ class GoalOrientedAgent(BaseAgent):
         self.goalMonitor.UpdateGoals(goal3Player,2)
         if self.goalMonitor.NeedReplaning(perception,map,self):
             self.problem.InitMap(map) ## refrescamos el mapa
-            self.plan=self._CreatePlan(perception, map)
+            #self.plan=self._CreatePlan(perception, map)
         return action, shot
     
     #método interno que encapsula la creació nde un plan
