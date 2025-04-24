@@ -23,7 +23,7 @@ class AStar:
         self.open.clear()
         self.processed.clear()
         self.open.append(self.problem.Initial())
-        path = []
+
         while self.open:
             
             self.open.sort(key=lambda x: x.F()) #ordenamos la lista de abiertos por el coste total (G+H)
@@ -41,10 +41,11 @@ class AStar:
                         #si es menor, lo actualizamos y le cambiamos el padre
                         self._ConfigureNode(found,current_node,current_node.G()+self.problem.GetGCost(successor))
 
-            self.processed.add(current_node)
+                if successor == self.problem.GetGoal():
+                    findGoal = True
+                    return self.ReconstructPath(successor)
 
-        path = self.ReconstructPath(current_node)
-        return path
+            self.processed.add(current_node)
 
     #nos permite configurar un nodo (node) con el padre y la nueva G
     def _ConfigureNode(self, node, parent, newG):
